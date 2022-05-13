@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['mediaedit.iitmandi.co.in']
-CSRF_TRUSTED_ORIGINS=[env('HOST_URL')]
+CSRF_TRUSTED_ORIGINS=['https://mediaedit.iitmandi.co.in']
 HOST_URL=env('HOST_URL')
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_COOKIE_SECURE = True
