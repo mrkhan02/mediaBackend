@@ -184,10 +184,10 @@ def search(request,query=""):
         if (len(query)>78 or len(query)<=0):
             articles=Article.objects.none()
         else:
-            allPostsTitle= Article.objects.filter(title__icontains=query).order_by('-sno')
-            allPostsAuthor= Article.objects.filter(author__icontains=query).order_by('-sno')
-            allPostsContent =Article.objects.filter(content__icontains=query).order_by('-sno')
-            articles=  allPostsTitle.union(allPostsContent, allPostsAuthor).order_by('-sno')
+            allPostsTitle= Article.objects.filter(title__icontains=query)
+            allPostsAuthor= Article.objects.filter(author__icontains=query)
+            allPostsContent =Article.objects.filter(content__icontains=query)
+            articles=  allPostsTitle.union(allPostsContent, allPostsAuthor)
         article_serializer=ArticleSerializer(articles,many=True)
         return JsonResponse(article_serializer.data,safe=False)
     else:
