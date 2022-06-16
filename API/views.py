@@ -70,7 +70,7 @@ def articleAPI(request,pk=-1):
 
         else:
             try:
-                articles=Article.objects.get(sno=pk,isActive=True)
+                articles=Article.objects.get(slug=pk,isActive=True)
             except Article.DoesNotExist:
                 result={'sno':-1}
                 return JsonResponse(result,safe=False)
@@ -87,7 +87,8 @@ def articleAPI(request,pk=-1):
                 else:
                     k+=s[i]
             articles.content=k
-          
+            articles.postViews=articles.postViews+1
+            
             article_serializer=ArticleSerializer(articles)
             
             return JsonResponse(article_serializer.data,safe=False) 
@@ -150,12 +151,12 @@ def newsletterAPI(request):
     if request.method=='POST':
         newsletter_data=JSONParser().parse(request)
         email=newsletter_data['email']
+        name=newsletter_data['name']
         try:
             newsletter=Newsletter.objects.get(email=email)
         except Newsletter.DoesNotExist:
             newsletter_serializer=NewsletterSerializer(data=newsletter_data)
             if newsletter_serializer.is_valid():
-                newsletter_serializer.save()
                 return JsonResponse("Added Successfully!!" , safe=False)
             return JsonResponse("Failed to Add.",safe=False)
         return JsonResponse('Aready Added',safe=False)
@@ -192,3 +193,24 @@ def search(request,query=""):
         return JsonResponse(article_serializer.data,safe=False)
     else:
         return JsonResponse('Bad Request',safe=False)
+
+@csrf_exempt
+def Home(request):
+    if request.user.is_authenticated:
+        return render(request,'home.html')
+    else :
+        return render(request,'error.html')
+
+@csrf_exempt
+def newsletterpage(request):
+    if request.user.is_authenticated:
+        return render(request,'newsletter.html')
+    else :
+        return render(request,'error.html')
+
+@csrf_exempt
+def sendNewsletter(request):
+    if request.user.is_authenticated:
+        return render(request,'home.html')
+    else :
+        return render(request,'error.html')

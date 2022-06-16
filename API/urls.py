@@ -27,7 +27,7 @@ urlpatterns = [
     path('article/opinion',views.OpinionList.as_view()),
     path('article/spotlight',views.SpotLightList.as_view()),
     path('spotlight/',views.WatchList.as_view()),
-    path('article/<int:pk>/',views.articleAPI,name='articleAPI'),
+    path('article/<str:pk>/',views.articleAPI,name='articleAPI'),
     path('pinnned/',views.PinnedList.as_view()),
     path('pinned/',views.pinnedArticle,name='pinnedArticle'),
     path('comment/<int:pk>/',views.commentAPI,name='commentAPI'),
@@ -38,6 +38,8 @@ urlpatterns = [
     path('search/<str:query>/',views.search,name='search'),
     path('search//',views.search,name='search'),
     path('search/',views.search,name='search'),
+    path('',views.Home,name='Home'),
+    path('newsletterpage/',views.newsletterpage,name='newsletterpage'),
       
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

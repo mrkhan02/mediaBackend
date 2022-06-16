@@ -9,6 +9,7 @@ from .constants import TAGS
 
 class Article(models.Model):
     sno=models.AutoField(primary_key=True)
+    slug=models.SlugField(default="sno-"+str(sno))
     thumbnail=models.ImageField()
     title=models.CharField(max_length=1000)
     author=models.CharField(max_length=255)
@@ -19,6 +20,7 @@ class Article(models.Model):
     isActive=models.BooleanField(default=False)
     tag=models.CharField(choices=TAGS,max_length=100,null=True,blank=True)
     isPinned=models.BooleanField(default=False)
+    postViews=models.IntegerField(default=0)
     def __str__(self):
         return self.title
 

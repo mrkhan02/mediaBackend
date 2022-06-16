@@ -30,8 +30,11 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['mediaedit.iitmandi.co.in']
-CSRF_TRUSTED_ORIGINS=['https://mediaedit.iitmandi.co.in']
+
+# ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = [env('ALLOWED_HOST')]
+CSRF_TRUSTED_ORIGINS=[env('C_URL')]
 HOST_URL=env('HOST_URL')
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_COOKIE_SECURE = True
@@ -73,7 +76,7 @@ ROOT_URLCONF = 'mediaBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['tempelates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
