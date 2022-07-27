@@ -1,5 +1,5 @@
 from crypt import methods
-from tkinter import NE
+#from tkinter import NE
 from django.shortcuts import render,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from urllib3 import HTTPResponse
@@ -11,6 +11,7 @@ from .serializers import ArticleSerializer,NewsletterSerializer,GallerySerialize
 from .mypagination import MyPageNumberPagination, MyPageNumberPaginationPinned
 from rest_framework.generics import ListAPIView
 from django.conf import settings
+from math import ceil
 # Create your views here.
 
 #API to get Article
@@ -55,8 +56,15 @@ class PinnedList(ListAPIView):
     serializer_class=ArticleSerializer
     pagination_class=MyPageNumberPaginationPinned
 
-
-
+@csrf_exempt
+def getPageCount(request):
+    if request.method == 'GET':
+        articlePerPage=MyPageNumberPagination.page_size
+        pageCount=Article.objects.filter(isActive=True).count()
+        pageCount=ceil(pageCount/articlePerPage)
+        return JsonResponse({'pageCount': pageCount, 'articlePerPage': articlePerPage},safe=False)
+    else:
+        return JsonResponse("Bad Request.",safe=False)
 
 
 @csrf_exempt
