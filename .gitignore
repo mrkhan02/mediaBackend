@@ -4,3 +4,5 @@ mediaenv/
 **/__pycache__/**
 *.cfg
 *.pyc
+db.sqlite3
+
