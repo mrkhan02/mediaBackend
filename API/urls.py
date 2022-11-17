@@ -26,6 +26,7 @@ urlpatterns = [
     path('article/scitech',views.SciTechList.as_view()),
     path('article/opinion',views.OpinionList.as_view()),
     path('article/spotlight',views.SpotLightList.as_view()),
+    path('article/getpagecount',views.getPageCount, name='getpagecount'),
     path('spotlight/',views.WatchList.as_view()),
     path('article/<str:pk>/',views.articleAPI,name='articleAPI'),
     path('pinnned/',views.PinnedList.as_view()),

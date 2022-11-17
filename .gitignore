@@ -1,2 +1,8 @@
 .env
 db.sqlite3
+mediaenv/
+**/__pycache__/**
+*.cfg
+*.pyc
+db.sqlite3
+
