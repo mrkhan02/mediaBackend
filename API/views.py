@@ -78,7 +78,7 @@ def articleAPI(request,pk=-1):
 
         else:
             try:
-                articles=Article.objects.get(slug=pk,isActive=True)
+                articles=Article.objects.get(sno=pk,isActive=True)
             except Article.DoesNotExist:
                 result={'sno':-1}
                 return JsonResponse(result,safe=False)
